@@ -2,9 +2,11 @@
 /*This code was generated using the UMPLE 1.30.1.5099.60569f335 modeling language!*/
 
 
+import java.sql.Time;
+import java.util.*;
 
-// line 29 "model.ump"
-// line 86 "model.ump"
+// line 35 "model.ump"
+// line 139 "model.ump"
 public class BusinessInfo
 {
 
@@ -14,24 +16,57 @@ public class BusinessInfo
 
   //BusinessInfo Attributes
   private String businessName;
-  private String businessAddress;
   private String emailAddress;
   private String phoneNo;
-  private int openingTime;
-  private int closingTime;
+  private Time openingTime;
+  private Time closingTime;
+
+  //BusinessInfo Associations
+  private ServiceList services;
+  private List<Customer> customerProfiles;
+  private Owner owner;
+  private Calendar schedule;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public BusinessInfo(String aBusinessName, String aBusinessAddress, String aEmailAddress, String aPhoneNo, int aOpeningTime, int aClosingTime)
+  public BusinessInfo(String aBusinessName, String aEmailAddress, String aPhoneNo, Time aOpeningTime, Time aClosingTime, ServiceList aServices, Owner aOwner, Calendar aSchedule)
   {
     businessName = aBusinessName;
-    businessAddress = aBusinessAddress;
     emailAddress = aEmailAddress;
     phoneNo = aPhoneNo;
     openingTime = aOpeningTime;
     closingTime = aClosingTime;
+    if (aServices == null || aServices.getBusinessInfo() != null)
+    {
+      throw new RuntimeException("Unable to create BusinessInfo due to aServices. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
+    }
+    services = aServices;
+    customerProfiles = new ArrayList<Customer>();
+    if (aOwner == null || aOwner.getBusiness() != null)
+    {
+      throw new RuntimeException("Unable to create BusinessInfo due to aOwner. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
+    }
+    owner = aOwner;
+    if (aSchedule == null || aSchedule.getBusinessInfo() != null)
+    {
+      throw new RuntimeException("Unable to create BusinessInfo due to aSchedule. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
+    }
+    schedule = aSchedule;
+  }
+
+  public BusinessInfo(String aBusinessName, String aEmailAddress, String aPhoneNo, Time aOpeningTime, Time aClosingTime, List aListOfServicesForServices, List aListOfServiceComboForServices, String aUsernameForOwner, String aPasswordForOwner, boolean aIsAvailableForSchedule)
+  {
+    businessName = aBusinessName;
+    emailAddress = aEmailAddress;
+    phoneNo = aPhoneNo;
+    openingTime = aOpeningTime;
+    closingTime = aClosingTime;
+    services = new ServiceList(aListOfServicesForServices, aListOfServiceComboForServices, this);
+    customerProfiles = new ArrayList<Customer>();
+    owner = new Owner(aUsernameForOwner, aPasswordForOwner, this);
+    schedule = new Calendar(aIsAvailableForSchedule, this);
   }
 
   //------------------------
@@ -42,14 +77,6 @@ public class BusinessInfo
   {
     boolean wasSet = false;
     businessName = aBusinessName;
-    wasSet = true;
-    return wasSet;
-  }
-
-  public boolean setBusinessAddress(String aBusinessAddress)
-  {
-    boolean wasSet = false;
-    businessAddress = aBusinessAddress;
     wasSet = true;
     return wasSet;
   }
@@ -70,7 +97,7 @@ public class BusinessInfo
     return wasSet;
   }
 
-  public boolean setOpeningTime(int aOpeningTime)
+  public boolean setOpeningTime(Time aOpeningTime)
   {
     boolean wasSet = false;
     openingTime = aOpeningTime;
@@ -78,7 +105,7 @@ public class BusinessInfo
     return wasSet;
   }
 
-  public boolean setClosingTime(int aClosingTime)
+  public boolean setClosingTime(Time aClosingTime)
   {
     boolean wasSet = false;
     closingTime = aClosingTime;
@@ -91,11 +118,6 @@ public class BusinessInfo
     return businessName;
   }
 
-  public String getBusinessAddress()
-  {
-    return businessAddress;
-  }
-
   public String getEmailAddress()
   {
     return emailAddress;
@@ -106,28 +128,171 @@ public class BusinessInfo
     return phoneNo;
   }
 
-  public int getOpeningTime()
+  public Time getOpeningTime()
   {
     return openingTime;
   }
 
-  public int getClosingTime()
+  public Time getClosingTime()
   {
     return closingTime;
   }
+  /* Code from template association_GetOne */
+  public ServiceList getServices()
+  {
+    return services;
+  }
+  /* Code from template association_GetMany */
+  public Customer getCustomerProfile(int index)
+  {
+    Customer aCustomerProfile = customerProfiles.get(index);
+    return aCustomerProfile;
+  }
+
+  public List<Customer> getCustomerProfiles()
+  {
+    List<Customer> newCustomerProfiles = Collections.unmodifiableList(customerProfiles);
+    return newCustomerProfiles;
+  }
+
+  public int numberOfCustomerProfiles()
+  {
+    int number = customerProfiles.size();
+    return number;
+  }
+
+  public boolean hasCustomerProfiles()
+  {
+    boolean has = customerProfiles.size() > 0;
+    return has;
+  }
+
+  public int indexOfCustomerProfile(Customer aCustomerProfile)
+  {
+    int index = customerProfiles.indexOf(aCustomerProfile);
+    return index;
+  }
+  /* Code from template association_GetOne */
+  public Owner getOwner()
+  {
+    return owner;
+  }
+  /* Code from template association_GetOne */
+  public Calendar getSchedule()
+  {
+    return schedule;
+  }
+  /* Code from template association_MinimumNumberOfMethod */
+  public static int minimumNumberOfCustomerProfiles()
+  {
+    return 0;
+  }
+  /* Code from template association_AddManyToOne */
+  public Customer addCustomerProfile(String aUsername, String aPassword, SignUp aAccount)
+  {
+    return new Customer(aUsername, aPassword, aAccount, this);
+  }
+
+  public boolean addCustomerProfile(Customer aCustomerProfile)
+  {
+    boolean wasAdded = false;
+    if (customerProfiles.contains(aCustomerProfile)) { return false; }
+    BusinessInfo existingBusinessInfo = aCustomerProfile.getBusinessInfo();
+    boolean isNewBusinessInfo = existingBusinessInfo != null && !this.equals(existingBusinessInfo);
+    if (isNewBusinessInfo)
+    {
+      aCustomerProfile.setBusinessInfo(this);
+    }
+    else
+    {
+      customerProfiles.add(aCustomerProfile);
+    }
+    wasAdded = true;
+    return wasAdded;
+  }
+
+  public boolean removeCustomerProfile(Customer aCustomerProfile)
+  {
+    boolean wasRemoved = false;
+    //Unable to remove aCustomerProfile, as it must always have a businessInfo
+    if (!this.equals(aCustomerProfile.getBusinessInfo()))
+    {
+      customerProfiles.remove(aCustomerProfile);
+      wasRemoved = true;
+    }
+    return wasRemoved;
+  }
+  /* Code from template association_AddIndexControlFunctions */
+  public boolean addCustomerProfileAt(Customer aCustomerProfile, int index)
+  {  
+    boolean wasAdded = false;
+    if(addCustomerProfile(aCustomerProfile))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfCustomerProfiles()) { index = numberOfCustomerProfiles() - 1; }
+      customerProfiles.remove(aCustomerProfile);
+      customerProfiles.add(index, aCustomerProfile);
+      wasAdded = true;
+    }
+    return wasAdded;
+  }
+
+  public boolean addOrMoveCustomerProfileAt(Customer aCustomerProfile, int index)
+  {
+    boolean wasAdded = false;
+    if(customerProfiles.contains(aCustomerProfile))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfCustomerProfiles()) { index = numberOfCustomerProfiles() - 1; }
+      customerProfiles.remove(aCustomerProfile);
+      customerProfiles.add(index, aCustomerProfile);
+      wasAdded = true;
+    } 
+    else 
+    {
+      wasAdded = addCustomerProfileAt(aCustomerProfile, index);
+    }
+    return wasAdded;
+  }
 
   public void delete()
-  {}
+  {
+    ServiceList existingServices = services;
+    services = null;
+    if (existingServices != null)
+    {
+      existingServices.delete();
+    }
+    for(int i=customerProfiles.size(); i > 0; i--)
+    {
+      Customer aCustomerProfile = customerProfiles.get(i - 1);
+      aCustomerProfile.delete();
+    }
+    Owner existingOwner = owner;
+    owner = null;
+    if (existingOwner != null)
+    {
+      existingOwner.delete();
+    }
+    Calendar existingSchedule = schedule;
+    schedule = null;
+    if (existingSchedule != null)
+    {
+      existingSchedule.delete();
+    }
+  }
 
 
   public String toString()
   {
     return super.toString() + "["+
             "businessName" + ":" + getBusinessName()+ "," +
-            "businessAddress" + ":" + getBusinessAddress()+ "," +
             "emailAddress" + ":" + getEmailAddress()+ "," +
-            "phoneNo" + ":" + getPhoneNo()+ "," +
-            "openingTime" + ":" + getOpeningTime()+ "," +
-            "closingTime" + ":" + getClosingTime()+ "]";
+            "phoneNo" + ":" + getPhoneNo()+ "]" + System.getProperties().getProperty("line.separator") +
+            "  " + "openingTime" + "=" + (getOpeningTime() != null ? !getOpeningTime().equals(this)  ? getOpeningTime().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
+            "  " + "closingTime" + "=" + (getClosingTime() != null ? !getClosingTime().equals(this)  ? getClosingTime().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
+            "  " + "services = "+(getServices()!=null?Integer.toHexString(System.identityHashCode(getServices())):"null") + System.getProperties().getProperty("line.separator") +
+            "  " + "owner = "+(getOwner()!=null?Integer.toHexString(System.identityHashCode(getOwner())):"null") + System.getProperties().getProperty("line.separator") +
+            "  " + "schedule = "+(getSchedule()!=null?Integer.toHexString(System.identityHashCode(getSchedule())):"null");
   }
 }
