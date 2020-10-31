@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-10-31T15:03:16.377Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36" etag="mnRSA8FrPUmYDoGeueRR" version="13.8.8" type="github">
+<mxfile host="app.diagrams.net" modified="2020-10-31T18:01:52.939Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36" etag="zOenikua3CReDiFHi4ao" version="13.8.8" type="github">
   <diagram name="Page-1" id="58cdce13-f638-feb5-8d6f-7d28b1aa9fa0">
     <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="#ffffff" math="0" shadow="0">
       <root>
@@ -49,8 +49,8 @@
             <mxPoint x="660" y="100" as="sourcePoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="7UpP1TA494WrTBKk1aUT-16" value="UpdateAppointment" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
-          <mxGeometry x="610" y="60" width="120" height="20" as="geometry" />
+        <mxCell id="7UpP1TA494WrTBKk1aUT-16" value="UpdateAppointment()&lt;br&gt;[CurrentDate &amp;lt; AppointmentDate]" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+          <mxGeometry x="600" y="55" width="190" height="30" as="geometry" />
         </mxCell>
         <mxCell id="7UpP1TA494WrTBKk1aUT-17" value="Start" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
           <mxGeometry x="180" y="80" width="40" height="20" as="geometry" />
@@ -58,11 +58,11 @@
         <mxCell id="7UpP1TA494WrTBKk1aUT-18" value="End" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
           <mxGeometry x="485" y="480" width="40" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="7UpP1TA494WrTBKk1aUT-19" value="StartAppointment" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
-          <mxGeometry x="580" y="160" width="110" height="20" as="geometry" />
+        <mxCell id="7UpP1TA494WrTBKk1aUT-19" value="StartAppointment()&lt;br&gt;[customerShowedUp() == true]" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+          <mxGeometry x="545" y="155" width="180" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="5arOomJfPyREK-iOa513-1" value="EndAppointment" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
-          <mxGeometry x="750" y="370" width="100" height="20" as="geometry" />
+        <mxCell id="5arOomJfPyREK-iOa513-1" value="EndAppointment()" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+          <mxGeometry x="745" y="370" width="110" height="20" as="geometry" />
         </mxCell>
         <mxCell id="5arOomJfPyREK-iOa513-4" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="7UpP1TA494WrTBKk1aUT-1" target="7UpP1TA494WrTBKk1aUT-14" edge="1">
           <mxGeometry relative="1" as="geometry">
@@ -71,11 +71,28 @@
             <Array as="points" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="5arOomJfPyREK-iOa513-5" value="CancelAppointment" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
-          <mxGeometry x="390" y="160" width="120" height="20" as="geometry" />
+        <mxCell id="5arOomJfPyREK-iOa513-5" value="CancelAppointment&lt;br&gt;[CurrentDate &amp;lt; AppointmentDate]" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+          <mxGeometry x="465" y="325" width="190" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="5arOomJfPyREK-iOa513-6" value="MakeAppointment" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
-          <mxGeometry x="245" y="40" width="110" height="20" as="geometry" />
+        <mxCell id="5arOomJfPyREK-iOa513-6" value="MakeAppointment()" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+          <mxGeometry x="240" y="40" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Avm5gltLBzykyz8cF-6h-1" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" target="7UpP1TA494WrTBKk1aUT-14">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="125" y="335" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="355" y="90" />
+              <mxPoint x="355" y="410" />
+              <mxPoint x="490" y="410" />
+            </Array>
+            <mxPoint x="430" y="90" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Avm5gltLBzykyz8cF-6h-2" value="StartAppointment()&lt;br&gt;[customerShowedUp == false]" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="235" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Avm5gltLBzykyz8cF-6h-3" value="delete the appointment" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
+          <mxGeometry x="510" y="430" width="140" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
